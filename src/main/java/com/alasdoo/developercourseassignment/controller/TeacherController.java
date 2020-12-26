@@ -31,6 +31,16 @@ public class TeacherController {
         return teacherServiceImpl.save(teacherDTO);
     }
 
+    @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public TeacherDTO updateTeacher(@PathVariable("id") Integer id, @RequestBody TeacherDTO teacherDTO) {
+        return teacherServiceImpl.update(id, teacherDTO);
+    }
+
+    @DeleteMapping(value = "/delete/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteTeacher(@PathVariable("id") Integer id) {
+        teacherServiceImpl.remove(id);
+    }
+
     @GetMapping(value = "/get/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TeacherDTO findByEmail(@PathVariable("email") String email) {
         return teacherServiceImpl.findByTeacherEmail(email);
