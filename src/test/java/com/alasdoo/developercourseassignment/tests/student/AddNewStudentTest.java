@@ -12,18 +12,22 @@ public class AddNewStudentTest extends SeleniumTestConfiguration {
 
     @Test
     public void addNewStudent() {
+        // Navigate to a list display of students
         driver.get("http://localhost:3000/student");
 
         StudentListPage studentListPage = new StudentListPage(driver);
+
+        // Open a "New student" form
         NewStudentPage newStudentPage = studentListPage.addNewStudent();
 
+        // Enter data for new student
         newStudentPage.enterNameAndSurname("John", "Doe");
         newStudentPage.enterBusinessData("johndoe", "johndoe@gmail.com", "123123");
 
+        // Confirm entered data
         SpecifiedStudentPage specifiedStudentPage = newStudentPage.submitData();
 
-        System.out.println(specifiedStudentPage.getName());
-        System.out.println(specifiedStudentPage.getSurname());
+        // Make sure that newly added student is indeed the one we wanted
         assertEquals("John", specifiedStudentPage.getName());
         assertEquals("Doe", specifiedStudentPage.getSurname());
     }

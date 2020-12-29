@@ -14,30 +14,26 @@ class ErrorBoundary extends Component {
 
   constructor(props) {
     super(props);
-      this.state = {error: null, info: null};
+    this.state = { error: null, info: null };
   }
 
   componentDidCatch(error, info) {
-      this.setState({error, info});
+    this.setState({ error, info });
   }
 
   render() {
-      const {children} = this.props;
-      const {error} = this.state;
+    const { children } = this.props;
+    const { error } = this.state;
 
-      if (error !== null) {
-          return (
-              < div >
-              < h1 > Oops
-          !An
-          error
-          occurred < /h1>
-          < /div>
-      )
-          ;
-      }
+    if (error !== null) {
+      return (
+        <div>
+          <h1>Oops! An error occurred</h1>
+        </div>
+      );
+    }
 
-      return children;
+    return children;
   }
 }
 

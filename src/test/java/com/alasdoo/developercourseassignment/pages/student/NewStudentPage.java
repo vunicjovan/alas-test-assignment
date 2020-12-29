@@ -1,6 +1,7 @@
 package com.alasdoo.developercourseassignment.pages.student;
 
 import com.alasdoo.developercourseassignment.pages.PageObject;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NewStudentPage extends PageObject {
 
+    /*
+     * nameInput = input field for student name
+     * surnameInput = input field for student surname
+     * accountNameInput = input field for account name of the student
+     * emailInput = input field for student email
+     * bankCardNumberInput = input field for bank card number of the student
+     * submitButton = form-submit button
+     */
     @FindBy(name = "name")
     private WebElement nameInput;
 
@@ -24,36 +33,55 @@ public class NewStudentPage extends PageObject {
     @FindBy(name = "bankCardNumber")
     private WebElement bankCardNumberInput;
 
-    @FindBy(xpath = "/html/body/div/div/main/div[2]/div[2]/form/div[6]/button[1]")
+    @FindBy(xpath = "//span[contains(text(), 'Save')]")
     private WebElement submitButton;
 
     public NewStudentPage(WebDriver driver) {
         super(driver);
-        assertTrue(nameInput.isDisplayed());
+        assertTrue(nameInput.isDisplayed());  // page will not be created if it isn't ready in time
     }
 
+    /**
+     * Multi-part user action for entering personal information about student into the form inputs.
+     */
     public void enterNameAndSurname(String name, String surname) {
-        this.nameInput.clear();
+        clearInput(this.nameInput);
         this.nameInput.sendKeys(name);
 
-        this.surnameInput.clear();
+        clearInput(this.surnameInput);
         this.surnameInput.sendKeys(surname);
     }
 
+    /**
+     * Multi-part user action for entering business information about student into the form inputs.
+     */
     public void enterBusinessData(String accountName, String email, String bankCardNumber) {
-        this.accountNameInput.clear();
+        clearInput(this.accountNameInput);
         this.accountNameInput.sendKeys(accountName);
 
-        this.emailInput.clear();
+        clearInput(this.emailInput);
         this.emailInput.sendKeys(email);
 
-        this.bankCardNumberInput.clear();
+        clearInput(this.bankCardNumberInput);
         this.bankCardNumberInput.sendKeys(bankCardNumber);
     }
 
+    /**
+     * Confirmation of input data, redirecting the user to a route meant for displaying newly added student.
+     * @return SpecifiedStudentPage specifiedStudentPage
+     */
     public SpecifiedStudentPage submitData() {
         this.submitButton.click();
         return new SpecifiedStudentPage(driver);
+    }
+
+    /**
+     * Helper method for input field clearing, considered as a workaround, especially for Chrome.
+     * Reference: https://github.com/SeleniumHQ/selenium/issues/6741
+     */
+    private void clearInput(WebElement element) {
+        element.clear();
+        element.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
     }
 
 }
