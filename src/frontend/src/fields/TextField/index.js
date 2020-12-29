@@ -20,53 +20,43 @@ import {useField} from 'formik';
  * @param {*} param0
  */
 export default function TextField({
-                                      name,
-                                      label,
-                                      helperText,
-                                      type = 'text',
-                                      required = false,
-                                      disabled = false,
-                                      fullWidth = false,
-                                      InputProps,
-                                  }) {
-    const localId = useRef(uniqueId('formik-text-field-'));
-    const [field, meta /*, helpers*/] = useField(name);
+  name,
+  label,
+  helperText,
+  type = 'text',
+  required = false,
+  disabled = false,
+  fullWidth = false,
+  InputProps,
+}) {
+  const localId = useRef(uniqueId('formik-text-field-'));
+  const [field, meta /*, helpers*/] = useField(name);
 
-    const isTouched = meta.touched;
-    const hasError = Boolean(meta.error);
+  const isTouched = meta.touched;
+  const hasError = Boolean(meta.error);
 
-    const helperTextDerived = isTouched && hasError ? meta.error : helperText;
+  const helperTextDerived = isTouched && hasError ? meta.error : helperText;
 
-    return (
-        < FormControl
-    error = {isTouched && hasError
-}
-    required = {required}
-    disabled = {disabled}
-    fullWidth = {fullWidth}
-        >
-        {label && < InputLabel
-    htmlFor = {localId.current} > {label} < /InputLabel>}
-        < Input
-    {...
-        field
-    }
-    {...
-        InputProps
-    }
-    id = {localId.current}
-    type = {type}
-    required = {required}
-    disabled = {disabled}
-    fullWidth = {fullWidth}
-    />
-    {
-        helperTextDerived && (
-        < FormHelperText > {helperTextDerived} < /FormHelperText>
-    )
-    }
-<
-    /FormControl>
-)
-    ;
+  return (
+    <FormControl
+      error={isTouched && hasError}
+      required={required}
+      disabled={disabled}
+      fullWidth={fullWidth}
+    >
+      {label && <InputLabel htmlFor={localId.current}>{label}</InputLabel>}
+      <Input
+        {...field}
+        {...InputProps}
+        id={localId.current}
+        type={type}
+        required={required}
+        disabled={disabled}
+        fullWidth={fullWidth}
+      />
+      {helperTextDerived && (
+        <FormHelperText>{helperTextDerived}</FormHelperText>
+      )}
+    </FormControl>
+  );
 }

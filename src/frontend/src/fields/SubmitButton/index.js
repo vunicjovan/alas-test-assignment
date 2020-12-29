@@ -5,26 +5,19 @@ import {isNil} from 'lodash/fp';
 import {useFormikContext} from 'formik';
 
 const useStyles = makeStyles(theme => ({
-    progress: {
-        marginRight: theme.spacing(1),
-    },
+  progress: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const propTypes = {
-    submitLabel: PropTypes.node,
+  submitLabel: PropTypes.node,
 };
 
 export default function SubmitButton(props) {
-    const {isSubmitting} = useFormikContext();
+  const { isSubmitting } = useFormikContext();
 
-    return
-<
-    SubmitButtonWithoutFormik
-    isSubmitting = {isSubmitting}
-    {...
-        props
-    }
-    />;
+  return <SubmitButtonWithoutFormik isSubmitting={isSubmitting} {...props} />;
 }
 
 /**
@@ -34,58 +27,42 @@ export default function SubmitButton(props) {
  * @param {*} param0
  */
 export function SubmitButtonWithoutFormik({
-                                              submitLabel,
-                                              children,
-                                              disabled,
-                                              isSubmitting,
-                                              onClick,
-                                              ...props
-                                          }) {
-    const classes = useStyles();
+  submitLabel,
+  children,
+  disabled,
+  isSubmitting,
+  onClick,
+  ...props
+}) {
+  const classes = useStyles();
 
-    return (
-        < Button
-    type = "submit"
-    variant = "contained"
-    color = "primary"
-    onClick = {onClick}
-    {...
-        props
-    }
-    disabled = {disabled || isSubmitting
-}
->
-    {
-        isSubmitting ? (
-            < React.Fragment >
-            < CircularProgress className = {classes.progress}
-        size = {20}
-        />
-        {
-            submitLabel && (
-            < Typography
-            color = "textSecondary" > {submitLabel} < /Typography>
-        )
-        }
-        {
-            isNil(submitLabel) && children
-        }
-    <
-        /React.Fragment>
-    ) :
-        (
-            children
-        )
-    }
-<
-    /Button>
-)
-    ;
+  return (
+    <Button
+      type="submit"
+      variant="contained"
+      color="primary"
+      onClick={onClick}
+      {...props}
+      disabled={disabled || isSubmitting}
+    >
+      {isSubmitting ? (
+        <React.Fragment>
+          <CircularProgress className={classes.progress} size={20} />
+          {submitLabel && (
+            <Typography color="textSecondary">{submitLabel}</Typography>
+          )}
+          {isNil(submitLabel) && children}
+        </React.Fragment>
+      ) : (
+        children
+      )}
+    </Button>
+  );
 }
 
 SubmitButton.propTypes = propTypes;
 
 SubmitButtonWithoutFormik.propTypes = {
-    ...propTypes,
-    isSubmitting: PropTypes.bool.isRequired,
+  ...propTypes,
+  isSubmitting: PropTypes.bool.isRequired,
 };

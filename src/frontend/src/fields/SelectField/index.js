@@ -20,62 +20,49 @@ import {useField} from 'formik';
  * @param {*} param0
  */
 export default function SelectField({
-                                        name,
-                                        label,
-                                        helperText,
-                                        required = false,
-                                        disabled = false,
-                                        fullWidth = false,
-                                        InputProps,
-                                        items = [],
-                                    }) {
-    const localId = useRef(uniqueId('formik-select-field-'));
-    const [field, meta /*, helpers*/] = useField(name);
+  name,
+  label,
+  helperText,
+  required = false,
+  disabled = false,
+  fullWidth = false,
+  InputProps,
+  items = [],
+}) {
+  const localId = useRef(uniqueId('formik-select-field-'));
+  const [field, meta /*, helpers*/] = useField(name);
 
-    const isTouched = meta.touched;
-    const hasError = Boolean(meta.error);
+  const isTouched = meta.touched;
+  const hasError = Boolean(meta.error);
 
-    const helperTextDerived = isTouched && hasError ? meta.error : helperText;
+  const helperTextDerived = isTouched && hasError ? meta.error : helperText;
 
-    return (
-        < FormControl
-    error = {isTouched && hasError
-}
-    required = {required}
-    disabled = {disabled}
-    fullWidth = {fullWidth}
-        >
-        {label && < InputLabel
-    htmlFor = {localId.current} > {label} < /InputLabel>}
-        < Select
-    id = {localId.current}
-    labelId = {localId.current}
-    {...
-        field
-    }
-    {...
-        InputProps
-    }
-    required = {required}
-    disabled = {disabled}
-    fullWidth = {fullWidth}
-        >
-        {
-            items.map(({value, label}) => (
-                < MenuItem value = {value} key = {value} >
+  return (
+    <FormControl
+      error={isTouched && hasError}
+      required={required}
+      disabled={disabled}
+      fullWidth={fullWidth}
+    >
+      {label && <InputLabel htmlFor={localId.current}>{label}</InputLabel>}
+      <Select
+        id={localId.current}
+        labelId={localId.current}
+        {...field}
+        {...InputProps}
+        required={required}
+        disabled={disabled}
+        fullWidth={fullWidth}
+      >
+        {items.map(({ value, label }) => (
+          <MenuItem value={value} key={value}>
             {label}
-            < /MenuItem>
-))
-}
-<
-    /Select>
-    {
-        helperTextDerived && (
-        < FormHelperText > {helperTextDerived} < /FormHelperText>
-    )
-    }
-<
-    /FormControl>
-)
-    ;
+          </MenuItem>
+        ))}
+      </Select>
+      {helperTextDerived && (
+        <FormHelperText>{helperTextDerived}</FormHelperText>
+      )}
+    </FormControl>
+  );
 }
