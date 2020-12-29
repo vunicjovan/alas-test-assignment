@@ -19,7 +19,7 @@ public class SeleniumTestConfiguration {
     * driverProperty = property used for configuration of Selenium web driver
     * driver = Selenium web driver used in every test class
     */
-    protected static String browserType = "opera";
+    protected static String browserType = "chrome";
     protected static String driverPath = "./src/test/resources/webdriver/" + browserType + "driver.exe";
     protected static String driverProperty = "webdriver." + browserType + ".driver";
     protected static WebDriver driver;
