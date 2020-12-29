@@ -53,3 +53,9 @@ For example, *StudentTestSuite* covers only tests refering to *Student* entity.
 
 In order to run isolated test suite, you first need to run both server and client applications.
 After that, just run chosen test suite class to initialize the test run.
+
+### NOTE
+
+In addition, below are demo shots of batch test suite in action, with both *Chrome* and *Opera* browsers:
+* [Chrome demo](https://drive.google.com/file/d/1reLGfSrA2DccU1iliax9IshMv9ThpK-2/view?usp=sharing)
+* [Opera demo](https://drive.google.com/file/d/1DwVX5ArYHmebsRrMyyCfTjduNCzHIwtF/view?usp=sharing)
