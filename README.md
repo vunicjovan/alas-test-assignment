@@ -59,3 +59,9 @@ After that, just run chosen test suite class to initialize the test run.
 In addition, below are demo shots of batch test suite in action, with both *Chrome* and *Opera* browsers:
 * [Chrome demo](https://drive.google.com/file/d/1reLGfSrA2DccU1iliax9IshMv9ThpK-2/view?usp=sharing)
 * [Opera demo](https://drive.google.com/file/d/1DwVX5ArYHmebsRrMyyCfTjduNCzHIwtF/view?usp=sharing)
+
+Additional takeaways:
+
+* Solution was developed in IntelliJ IDEA IDE
+* Client and server side can be executed from shell (explained at the start of document), but test suites cannot - one should open them in IDE and run them
+* slf4j was used as a test logging system
